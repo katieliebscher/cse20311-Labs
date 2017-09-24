@@ -1,0 +1,104 @@
+
+   // Kathleen Liebscher
+   // Section 2
+   // This program determines the largest pandigitalprime number. 
+   
+   #include <cmath>
+   #include <iomanip>
+   #include <iostream>
+   
+   using namespace std;
+   void findNewPandigitalPrime(int &);
+   
+   int main()
+  {
+      bool prime = false;
+      int pandigitalPrime = 1000;
+      while(!prime)
+      {
+          int divisorMax = sqrt(pandigitalPrime);
+          cout << divisorMax << endl;
+          int divisorInitial = 2;
+          int divisor = 2;
+          while(divisor <= divisorMax)
+          {
+              if(pandigitalPrime % divisor == 0)
+              {
+                  cout << "in if(pandigitalPrime 5 divisor == 0) " << endl;
+                  // function to find new pandigital number
+                  findNewPandigitalPrime(pandigitalPrime);
+                  divisor = divisorInitial;
+  
+              }
+              else
+             {
+                  cout << "In else " << endl;
+                  divisor = divisor + 1;
+              }
+  
+               if(divisor > divisorMax)
+              {
+                 cout << "in if(divisor > divisorMax) " << endl;
+                  prime = true;
+                  cout << "The largest pandigital Prime Number is " << pandigitalPrime << endl;
+              }
+          }
+     }
+  
+      return 0;
+    }
+  
+  void findNewPandigitalPrime(int &pandigitalPrime)
+  {
+      cout << "in function for new prime" << endl;
+      bool repeat = true;
+      while(repeat)
+      {
+          int substitutePandigitalPrime = pandigitalPrime - 1;
+          int digitsInPandigitalPrime = 0;
+  
+          while(substitutePandigitalPrime > 0)
+          {
+              substitutePandigitalPrime = substitutePandigitalPrime / 10;
+             cout << substitutePandigitalPrime << endl;
+              digitsInPandigitalPrime = digitsInPandigitalPrime + 1;
+          }
+         cout << digitsInPandigitalPrime;
+         substitutePandigitalPrime = pandigitalPrime;
+          const int primeSize = digitsInPandigitalPrime;
+          int digits[primeSize];
+          cout << primeSize << endl;
+  
+           for(int i = 0; i < primeSize; i++)
+           {
+               cout << "in first for loop" << endl;
+               digits[(primeSize - i)] = substitutePandigitalPrime % 10;
+               substitutePandigitalPrime = substitutePandigitalPrime / 10;
+           }
+   
+   
+           bool matchingValues = false;
+           int i = 1;
+           while(i <= primeSize)
+           {
+               if(digits[i] == digits[i-1])
+               {
+                  matchingValues = true;
+                   substitutePandigitalPrime = substitutePandigitalPrime - 1;
+                   break;
+               }
+   
+              i++;
+          }
+  
+          if(!matchingValues)
+          {
+             repeat = false;
+              pandigitalPrime = substitutePandigitalPrime;
+          }
+      }
+  
+      return;
+  }
+                                                                                                    
+                                                                                    80,12-18      Bot
